@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -20,7 +23,8 @@ public class Habit {
 
     private String description;
 
-    private int currentStreak = 0;
+    @OneToMany (mappedBy = "habit", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HabitRecord> records = new ArrayList<>();
 
     public Habit (String name, String description){
         this.name = name;
